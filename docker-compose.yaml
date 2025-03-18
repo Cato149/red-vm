@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: red_vm
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "red_vm"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+# К сожалению на то чтобы настрооить полнооценный запуск в контейнере у меня времени не хватиоло:(
